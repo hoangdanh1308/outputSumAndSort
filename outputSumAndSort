@@ -1,0 +1,123 @@
+#include <stdio.h>
+#include <stdint.h>
+#include <stdbool.h>
+#include <string.h>
+
+void *cacl[10];
+int indexCacl = 0;
+int8_t key;
+float totalNumbers = 0;
+int arrInterger[10];
+int indexArrInterger = 0;
+float arrFloat[10];
+int indexArrFloat = 0;
+char arrChar[10]="zzzzzzzzz";
+int indexArrChar = 0;
+char *arrString[10];
+int indexArrString = 0;
+char firstChar[10];
+
+void swapChar(char inputArrChar[],int index1, int index2){
+    char tempChar;
+    tempChar = inputArrChar[index1];
+    inputArrChar[index1] = inputArrChar[index2];
+    inputArrChar[index2] = tempChar;
+}
+
+void swapString(char *inputArrString[],int index1, int index2){
+    char tempString[10];
+    strcpy(tempString,inputArrString[index1]);
+    inputArrString[index1] = inputArrString[index2];
+    inputArrString[index2] = tempString;
+}
+
+void sortArrChar(char inputArrChar[], int length){
+    for (int i = 0; i < length; i++){
+        for (int j = 0; j < length - 1; j++){
+            if(inputArrChar[j] > inputArrChar[j + 1]){
+                swapChar(inputArrChar, j, j + 1);
+            }
+        }
+    }
+}
+int main(int argc, char const *argv[])
+{
+    do{ 
+        char tempString[10];
+        printf("select the data type you want to import:\nKey 1: Interger.\nKey 2: Float.\nKey 3: Char.\nKey 4: String.\nKey 5: Exit.\n");
+        scanf("%d",&key);
+        switch (key)
+        {
+        case 1:
+            scanf("%d",&arrInterger[indexArrInterger]);
+            cacl[indexCacl] = &arrInterger[indexArrInterger];
+            totalNumbers = totalNumbers + (float)arrInterger[indexArrInterger];
+            indexArrInterger ++;
+            indexCacl ++;
+            break;
+        case 2:
+            scanf("%f",&arrFloat[indexArrFloat]);
+            cacl[indexCacl] = &arrFloat[indexArrFloat];
+            totalNumbers = totalNumbers + arrFloat[indexArrFloat];
+            indexCacl ++;
+            indexArrFloat ++;
+            break;
+        case 3:
+            fflush(stdin);
+            scanf("%c",&arrChar[indexArrChar]);
+            cacl[indexCacl] = &arrChar[indexArrChar];
+            indexCacl ++;
+            indexArrChar ++;
+            break;
+        case 4:
+            scanf("%s",tempString);
+            firstChar[indexArrString] = tempString[0];
+            arrString[indexArrString] = tempString;
+            cacl[indexCacl] = arrString[indexArrString];
+            indexCacl ++;
+            indexArrString ++;
+            break;
+        default:
+            break;
+        }
+    } while(key >=1 && key <=4);
+    printf("%f\n",totalNumbers);
+    sortArrChar(arrChar,indexArrChar);
+    printf("%d",indexArrChar);
+    for(int i = 0; i< indexArrChar; i++){
+        printf("%c",arrChar[i]);
+    }
+
+    for (int i = 0; i < indexArrString; i++){
+        for (int j = 0; j < indexArrString - 1; j++){
+            if(firstChar[j] > firstChar[j + 1]){
+                swapChar(firstChar, j, j + 1);
+                swapString(arrString, j, j+1);
+            }
+        }
+    }
+
+    for (int i = 0; i < indexArrChar;i++){
+        for (int j = 0; j < indexArrString; j++){
+            if(arrChar[i] < firstChar[j]){
+                printf("%c",arrChar[i]);
+                if(i == indexArrChar-1){
+                    for(int k = j;k < indexArrString; k++){
+                    printf("%s",arrString[j]);
+                    }
+                }
+                break;
+            } else if(arrChar[i] == firstChar[j]){
+                printf("%c",arrChar[i]);
+                printf("%s",arrString[j]);
+                break;
+            } else if(arrChar[i] > firstChar[j]){
+                printf("%s",arrString[j]);
+                if(i == indexArrChar-1){
+                    printf("%c",arrChar[i]);
+                }
+            }
+        }
+    }
+    return 0;
+}
