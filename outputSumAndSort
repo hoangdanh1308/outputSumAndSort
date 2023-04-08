@@ -3,20 +3,6 @@
 #include <stdbool.h>
 #include <string.h>
 
-void *cacl[10];
-int indexCacl = 0;
-int8_t key;
-float totalNumbers = 0;
-int arrInterger[10];
-int indexArrInterger = 0;
-float arrFloat[10];
-int indexArrFloat = 0;
-char arrChar[10]="zzzzzzzzz";
-int indexArrChar = 0;
-char *arrString[10];
-int indexArrString = 0;
-char firstChar[10];
-
 void swapChar(char inputArrChar[],int index1, int index2){
     char tempChar;
     tempChar = inputArrChar[index1];
@@ -41,7 +27,20 @@ void sortArrChar(char inputArrChar[], int length){
     }
 }
 int main(int argc, char const *argv[])
-{
+{   
+void *cacl[10];
+int indexCacl = 0;
+int8_t key;
+float totalNumbers = 0;
+int arrInterger[10];
+int indexArrInterger = 0;
+float arrFloat[10];
+int indexArrFloat = 0;
+char arrChar[10]="zzzzzzzzz";
+int indexArrChar = 0;
+char *arrString[10];
+int indexArrString = 0;
+char firstChar[10];
     do{ 
         char tempString[10];
         printf("select the data type you want to import:\nKey 1: Interger.\nKey 2: Float.\nKey 3: Char.\nKey 4: String.\nKey 5: Exit.\n");
@@ -81,12 +80,10 @@ int main(int argc, char const *argv[])
             break;
         }
     } while(key >=1 && key <=4);
+
     printf("%f\n",totalNumbers);
+
     sortArrChar(arrChar,indexArrChar);
-    printf("%d",indexArrChar);
-    for(int i = 0; i< indexArrChar; i++){
-        printf("%c",arrChar[i]);
-    }
 
     for (int i = 0; i < indexArrString; i++){
         for (int j = 0; j < indexArrString - 1; j++){
